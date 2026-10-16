@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10243a">
+  <meta name="referrer" content="no-referrer">
+  <title>Privasi · NvanPass</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./">NvanPass</a>
+    <a class="chip" href="./">Kembali ke aplikasi</a>
+  </header>
+  <main class="prose">
+    <h1>Privasi: apa yang terjadi pada filemu</h1>
+    <p class="lead">Singkatnya: file berpindah langsung dari browser ke browser. Kami tidak punya server yang menerima, menyimpan, atau meneruskannya.</p>
+
+    <h2>Yang tidak kami lakukan</h2>
+    <ul>
+      <li>Tidak ada akun, iklan, cookie pelacak, atau analitik.</li>
+      <li>File tidak diunggah ke mana pun. Situs ini hanya halaman statis di GitHub Pages.</li>
+      <li>Kamera hanya dipakai untuk membaca QR di perangkatmu. Gambarnya tidak direkam dan tidak dikirim.</li>
+      <li>Satu-satunya yang disimpan di browser adalah pilihan bahasa.</li>
+    </ul>
+
+    <h2>Yang perlu kamu tahu</h2>
+    <ul>
+      <li><strong>Kode koneksi memuat alamat IP.</strong> Kode di QR, tautan, atau teks yang kamu bagikan berisi informasi jaringan perangkatmu, termasuk alamat IP. Siapa pun yang memegang kode bisa melihatnya. Untuk perangkat yang berdekatan, tunjukkan QR langsung. Bagikan tautan atau kode lewat chat hanya ke orang yang kamu kenal.</li>
+      <li><strong>Server STUN publik.</strong> Supaya dua perangkat bisa saling menemukan alamat internetnya, browser bertanya ke server STUN gratis (saat ini milik Google dan Cloudflare). Mereka melihat alamat IP-mu, tetapi tidak melihat isi file.</li>
+      <li><strong>Terenkripsi di jalan.</strong> Transfer memakai data channel WebRTC yang terenkripsi (DTLS). Sidik jari enkripsi ikut di dalam kode, jadi hanya perangkat yang memegang kode itu yang bisa tersambung.</li>
+      <li><strong>Hosting.</strong> GitHub Pages bisa mencatat kunjungan ke halaman ini sesuai kebijakan GitHub. Itu terjadi sebelum transfer dan tidak menyangkut file.</li>
+    </ul>
+
+    <h2>Keamanan saat menerima</h2>
+    <ul>
+      <li>Penerima selalu melihat nama, ukuran, dan jenis file sebelum apa pun diunduh, lalu memutuskan Terima atau Tolak.</li>
+      <li>File tidak pernah dibuka otomatis. Terima hanya dari orang yang kamu kenal, terutama file seperti .apk atau .exe.</li>
+    </ul>
+
+    <h2>Batasan</h2>
+    <p>Tanpa server perantara, dua perangkat di jaringan yang memblokir koneksi langsung (sebagian data seluler, Wi-Fi kantor atau kampus, VPN) tidak bisa tersambung. Saat itu terjadi, aplikasi menampilkan penyebab dan saran: pakai Wi-Fi yang sama atau hotspot.</p>
+
+    <h2 lang="en">In English</h2>
+    <p lang="en">Files go straight from one browser to the other over an encrypted WebRTC data channel. There are no accounts, trackers, or servers that store or relay files. The connection code you share contains your device’s IP address, so share it only with people you know. Public STUN servers (Google, Cloudflare) see your IP address to help the two devices find each other, but never your files. The camera is used only to read QR codes on your own device. Only your language choice is stored in the browser.</p>
+  </main>
+  <footer class="foot"><a href="https://github.com/nopanpeno/NvanPass" rel="noopener">GitHub</a></footer>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10243a">
+  <meta name="description" content="Kirim file antar perangkat lewat QR, langsung dari browser ke browser. Tanpa akun, tanpa server penyimpan.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self'; media-src 'self' blob:; base-uri 'none'; form-action 'none'">
+  <title>NvanPass</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./" aria-label="NvanPass">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="12" height="22" rx="3" fill="currentColor"/><rect x="18" y="5" width="12" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="3.2" fill="#ffc93c"/></svg>
+      <span>NvanPass</span>
+    </a>
+    <button type="button" class="chip" id="lang-btn"></button>
+  </header>
+
+  <main id="main">
+    <noscript><p class="notice" data-i18n="noscript">NvanPass butuh JavaScript untuk menghubungkan dua perangkat.</p></noscript>
+
+    <!-- Beranda -->
+    <section data-screen="home" hidden>
+      <h1 tabindex="-1" data-i18n="home.title"></h1>
+      <p class="lead" data-i18n="home.lead"></p>
+      <div class="choices">
+        <button type="button" class="choice choice-send" id="go-send">
+          <span class="choice-name" data-i18n="home.send"></span>
+          <span class="choice-sub" data-i18n="home.send.sub"></span>
+        </button>
+        <button type="button" class="choice choice-recv" id="go-recv">
+          <span class="choice-name" data-i18n="home.receive"></span>
+          <span class="choice-sub" data-i18n="home.receive.sub"></span>
+        </button>
+      </div>
+      <p class="muted" data-i18n="home.note"></p>
+    </section>
+
+    <!-- Pengirim: pilih file -->
+    <section data-screen="pick" hidden>
+      <h1 tabindex="-1" data-i18n="pick.title"></h1>
+      <label class="drop" id="drop">
+        <input type="file" id="file-input" class="sr-only">
+        <span class="btn btn-primary" id="pick-btn" data-i18n="pick.button"></span>
+        <span class="muted" data-i18n="pick.drop"></span>
+      </label>
+      <div class="filecard" id="pick-file" hidden>
+        <p class="filecard-name" id="pick-name"></p>
+        <p class="filecard-meta" id="pick-size"></p>
+      </div>
+      <p class="msg msg-error" id="pick-error" role="alert" hidden></p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="pick-next" data-i18n="pick.next" disabled></button>
+        <button type="button" class="btn btn-quiet" data-back data-i18n="common.back"></button>
+      </div>
+    </section>
+
+    <!-- Pengirim: tawaran + masukkan jawaban -->
+    <section data-screen="offer" hidden>
+      <p class="step" data-i18n="offer.step1"></p>
+      <h1 tabindex="-1" data-i18n="offer.title1"></h1>
+      <p class="lead" data-i18n="offer.hint"></p>
+      <div class="ticket" id="offer-ticket" aria-busy="true">
+        <div class="ticket-stub">
+          <span class="ticket-label" data-i18n="offer.ticket"></span>
+          <span class="ticket-file" id="offer-file"></span>
+        </div>
+        <div class="ticket-body">
+          <canvas class="qr" id="offer-qr" role="img" data-i18n-alt="offer.qr.alt" hidden></canvas>
+          <p class="loading" id="offer-loading" data-i18n="offer.preparing"></p>
+          <output class="codebox" id="offer-code" hidden></output>
+          <div class="actions actions-tight" id="offer-actions" hidden>
+            <button type="button" class="btn" id="offer-copy" data-i18n="common.copy"></button>
+            <button type="button" class="btn" id="offer-share" data-i18n="offer.share"></button>
+          </div>
+          <p class="msg" id="offer-share-msg" role="status" hidden></p>
+        </div>
+      </div>
+
+      <div id="offer-step2" hidden>
+        <p class="step" data-i18n="offer.step2"></p>
+        <h2 data-i18n="offer.title2"></h2>
+        <div class="route">
+          <button type="button" class="btn btn-primary" id="offer-scan" data-i18n="offer.scan"></button>
+        </div>
+        <label class="field" for="offer-paste" data-i18n="offer.paste.label"></label>
+        <textarea id="offer-paste" rows="3" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="nvp1.…"></textarea>
+        <div class="actions">
+          <button type="button" class="btn" id="offer-paste-btn" data-i18n="offer.paste.btn"></button>
+        </div>
+        <p class="msg msg-error" id="offer-error" role="alert" hidden></p>
+        <p class="msg" id="offer-status" role="status" hidden></p>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-quiet" data-back data-i18n="common.back"></button></div>
+    </section>
+
+    <!-- Penerima: masukkan tawaran -->
+    <section data-screen="recv" hidden>
+      <h1 tabindex="-1" data-i18n="recv.title"></h1>
+      <div class="route">
+        <button type="button" class="btn btn-primary" id="recv-scan" data-i18n="recv.scan"></button>
+      </div>
+      <label class="field" for="recv-paste" data-i18n="recv.paste.label"></label>
+      <textarea id="recv-paste" rows="3" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="nvp1.…"></textarea>
+      <div class="actions">
+        <button type="button" class="btn" id="recv-paste-btn" data-i18n="recv.paste.btn"></button>
+        <button type="button" class="btn btn-quiet" data-back data-i18n="common.back"></button>
+      </div>
+      <p class="msg msg-error" id="recv-error" role="alert" hidden></p>
+    </section>
+
+    <!-- Penerima: jawaban -->
+    <section data-screen="answer" hidden>
+      <h1 tabindex="-1" data-i18n="answer.title"></h1>
+      <p class="lead" data-i18n="answer.hint"></p>
+      <div class="ticket ticket-answer" id="answer-ticket" aria-busy="true">
+        <div class="ticket-stub">
+          <span class="ticket-label" data-i18n="answer.ticket"></span>
+        </div>
+        <div class="ticket-body">
+          <canvas class="qr" id="answer-qr" role="img" data-i18n-alt="answer.qr.alt" hidden></canvas>
+          <p class="loading" id="answer-loading" data-i18n="answer.preparing"></p>
+          <output class="codebox" id="answer-code" hidden></output>
+          <div class="actions actions-tight" id="answer-actions" hidden>
+            <button type="button" class="btn" id="answer-copy" data-i18n="common.copy"></button>
+            <button type="button" class="btn" id="answer-share" data-i18n="answer.share"></button>
+          </div>
+          <p class="msg" id="answer-share-msg" role="status" hidden></p>
+        </div>
+      </div>
+      <p class="msg" id="answer-status" role="status" data-i18n="answer.waiting"></p>
+      <div class="actions"><button type="button" class="btn btn-quiet" data-back data-i18n="common.back"></button></div>
+    </section>
+
+    <!-- Transfer -->
+    <section data-screen="transfer" hidden>
+      <p class="badge" data-i18n="xfer.connected"></p>
+      <h1 tabindex="-1" id="xfer-title"></h1>
+
+      <div id="xfer-incoming" class="panel" hidden>
+        <dl class="facts">
+          <dt data-i18n="incoming.name"></dt><dd id="in-name"></dd>
+          <dt data-i18n="incoming.size"></dt><dd id="in-size"></dd>
+          <dt data-i18n="incoming.type"></dt><dd id="in-type"></dd>
+        </dl>
+        <p class="msg msg-warn" id="in-risky" role="alert" hidden></p>
+        <p class="muted" data-i18n="incoming.hint"></p>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="in-accept" data-i18n="incoming.accept"></button>
+          <button type="button" class="btn" id="in-decline" data-i18n="incoming.decline"></button>
+        </div>
+      </div>
+
+      <div id="xfer-progress" class="panel" hidden>
+        <progress id="bar" max="100" value="0"></progress>
+        <p class="muted" id="bar-text" role="status"></p>
+        <p class="muted" data-i18n="xfer.keep"></p>
+        <div class="actions"><button type="button" class="btn" id="xfer-cancel" data-i18n="xfer.cancel"></button></div>
+      </div>
+
+      <div id="xfer-done" class="panel" hidden>
+        <p class="msg msg-ok" id="done-text" role="status"></p>
+        <a class="btn btn-primary" id="save-link" hidden data-i18n="xfer.save"></a>
+        <p class="muted" id="save-hint" data-i18n="xfer.received.hint" hidden></p>
+        <div class="actions">
+          <button type="button" class="btn" id="send-another" hidden data-i18n="xfer.another"></button>
+          <button type="button" class="btn btn-quiet" id="xfer-finish" data-i18n="xfer.finish"></button>
+        </div>
+      </div>
+
+      <p class="msg" id="xfer-note" role="status" hidden></p>
+    </section>
+
+    <!-- Galat -->
+    <section data-screen="error" hidden>
+      <h1 tabindex="-1" id="err-title"></h1>
+      <p class="lead" id="err-body" role="alert"></p>
+      <div class="panel" id="err-tips" hidden>
+        <h2 data-i18n="err.tips.title"></h2>
+        <ul>
+          <li data-i18n="err.tip.1"></li>
+          <li data-i18n="err.tip.2"></li>
+          <li data-i18n="err.tip.3"></li>
+          <li data-i18n="err.tip.4"></li>
+        </ul>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-primary" id="err-restart" data-i18n="common.restart"></button></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span data-i18n="footer.tag"></span>
+    <a href="privacy.html" data-i18n="footer.privacy"></a>
+    <a href="https://github.com/nopanpeno/NvanPass" rel="noopener">GitHub</a>
+  </footer>
+
+  <!-- Pemindai kamera -->
+  <dialog id="scan-dialog" aria-labelledby="scan-title">
+    <h2 id="scan-title" data-i18n="scan.title"></h2>
+    <div class="viewfinder"><video id="scan-video" playsinline muted></video><i class="reticle"></i></div>
+    <p class="msg" id="scan-msg" role="status"></p>
+    <div class="actions"><button type="button" class="btn btn-primary" id="scan-close" data-i18n="scan.close"></button></div>
+  </dialog>
+
+  <!-- Peringatan privasi sebelum membagikan kode -->
+  <dialog id="warn-dialog" aria-labelledby="warn-title">
+    <h2 id="warn-title" data-i18n="warn.title"></h2>
+    <p data-i18n="warn.body"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="warn-ok" data-i18n="warn.ok"></button>
+      <button type="button" class="btn" id="warn-cancel" data-i18n="common.cancel"></button>
+    </div>
+  </dialog>
+
+  <script src="vendor/qrcode.js"></script>
+  <script src="vendor/jsQR.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
