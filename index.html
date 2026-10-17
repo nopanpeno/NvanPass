@@ -25,6 +25,16 @@
 
     <!-- Beranda -->
     <section data-screen="home" hidden>
+      <div class="hero" aria-hidden="true">
+        <svg class="hero-art" viewBox="0 0 400 140" focusable="false">
+          <rect x="40" y="30" width="52" height="80" rx="11" fill="#fff"/>
+          <rect x="308" y="32" width="50" height="76" rx="10" fill="none" stroke="#fff" stroke-width="5"/>
+          <line x1="110" y1="70" x2="290" y2="70" stroke="#fff" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 11"/>
+          <circle class="packet packet-1" cx="110" cy="70" r="8" fill="#ffc93c"/>
+          <circle class="packet packet-2" cx="110" cy="70" r="8" fill="#ffc93c"/>
+          <circle class="packet packet-3" cx="110" cy="70" r="8" fill="#ffc93c"/>
+        </svg>
+      </div>
       <h1 tabindex="-1" data-i18n="home.title"></h1>
       <p class="lead" data-i18n="home.lead"></p>
       <div class="choices">
@@ -61,7 +71,7 @@
 
     <!-- Pengirim: tawaran + masukkan jawaban -->
     <section data-screen="offer" hidden>
-      <p class="step" data-i18n="offer.step1"></p>
+      <p class="step step-1" data-i18n="offer.step1"></p>
       <h1 tabindex="-1" data-i18n="offer.title1"></h1>
       <p class="lead" data-i18n="offer.hint"></p>
       <div class="ticket" id="offer-ticket" aria-busy="true">
@@ -82,7 +92,7 @@
       </div>
 
       <div id="offer-step2" hidden>
-        <p class="step" data-i18n="offer.step2"></p>
+        <p class="step step-2" data-i18n="offer.step2"></p>
         <h2 data-i18n="offer.title2"></h2>
         <div class="route">
           <button type="button" class="btn btn-primary" id="offer-scan" data-i18n="offer.scan"></button>
