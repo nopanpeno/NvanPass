@@ -45,6 +45,10 @@ Di repo: **Settings → Pages → Build and deployment → Source: GitHub Action
 | `js/i18n.js` | Teks Indonesia dan Inggris |
 | `vendor/` | qrcode-generator (MIT) dan jsQR (Apache-2.0), tanpa perubahan |
 
+## Lisensi
+
+Kode NvanPass berlisensi [MIT](LICENSE). Pustaka pihak ketiga di `vendor/` memiliki lisensi masing-masing; lihat [vendor/README.md](vendor/README.md).
+
 ## Status terhadap PRD
 
 | Fitur | Status |
