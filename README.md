@@ -60,12 +60,14 @@ Kode NvanPass berlisensi [MIT](LICENSE). Pustaka pihak ketiga di `vendor/` memil
 
 Pengirim bisa mengirim file satu per satu selama koneksi masih terbuka.
 
-## Yang masih perlu diuji di perangkat nyata
+## Pengujian di perangkat nyata
 
-Tes otomatis memakai Chromium di satu mesin. Sebelum dianggap MVP, PRD meminta uji di perangkat nyata:
+Uji manual yang dilaporkan berhasil: Android ke Android dan Android ke laptop, baik melalui Wi-Fi yang sama maupun jaringan berbeda. Model perangkat, browser, dan ukuran file belum dicatat, jadi hasil ini belum menjadi validasi kompatibilitas menyeluruh.
 
-- Android Chrome, iOS Safari, dan desktop, termasuk scan kamera dan unduhan di iOS.
-- Target tersambung ≤ 30 detik dan tingkat tersambung ≥ 80% di Wi-Fi yang sama.
+Hal yang masih perlu diuji atau dicatat:
+
+- Model perangkat dan versi browser yang dipakai, ukuran file, waktu koneksi, serta apakah file hasil transfer cocok.
+- iOS Safari, termasuk pemindaian kamera dan cara menyimpan file. iPhone belum diuji.
 - Batas ukuran file (`maxFileBytes` di `js/config.js`, sementara 500 MB) di HP kelas menengah. Penerima menampung file di memori, jadi batas ini perlu divalidasi.
 - Perilaku kandidat jaringan: browser modern menyembunyikan IP lokal di balik nama mDNS (`xxxx.local`). Resolusinya antar perangkat di satu Wi-Fi perlu dicek, terutama Android ke iOS.
-- Transfer saat layar mati atau tab berpindah (iOS).
+- Transfer saat layar mati atau tab berpindah, terutama di iOS.
