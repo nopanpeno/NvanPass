@@ -402,6 +402,7 @@ function drawProgress({ done, total }) {
   const pct = total ? Math.min(100, Math.floor((done / total) * 100)) : 100;
   $('bar').max = 100;
   $('bar').value = pct;
+  $('bar-pct').textContent = `${pct}%`;
   const bps = speed.sample(done);
   let text = t('progress.line', { pct: `${pct}%`, done: formatBytes(done), total: formatBytes(total) });
   if (bps > 0) text += ` · ${t('progress.speed', { speed: formatBytes(bps) })}`;
@@ -420,11 +421,13 @@ function renderTransfer() {
     title = t('xfer.waitaccept', { name });
     panels.progress = true;
     $('bar').removeAttribute('value');
+    $('bar-pct').textContent = '';
     $('bar-text').textContent = '';
   } else if (m === 'sending' || m === 'receiving') {
     title = t(m === 'sending' ? 'xfer.sending' : 'xfer.receiving', { name });
     panels.progress = true;
     $('bar').value = 0;
+    $('bar-pct').textContent = '0%';
     $('bar-text').textContent = '';
     if (X.latest) drawProgress(X.latest);
   } else if (m === 'sent') {
