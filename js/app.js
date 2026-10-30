@@ -457,6 +457,8 @@ function renderTransfer() {
   if (S.peerGone && !ACTIVE_MODES.includes(m)) notice = t('xfer.peerleft');
 
   $('xfer-title').textContent = title;
+  const tone = m === 'rejected' || m === 'cancelled' ? 'warn' : 'ok';
+  document.querySelectorAll('#xfer-done .status-ico').forEach((el) => el.classList.toggle('on', el.dataset.tone === tone));
   $('xfer-incoming').hidden = !panels.incoming;
   $('xfer-progress').hidden = !panels.progress;
   $('xfer-done').hidden = !panels.done;
