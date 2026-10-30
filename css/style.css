@@ -345,6 +345,18 @@ dialog > * + * { margin-top: .875rem; }
   box-shadow: 0 0 0 999px rgba(8, 19, 31, .45); pointer-events: none;
 }
 
+/* Layar kecil: gutter 16px, target sentuh lebih besar */
+@media (max-width: 26rem) {
+  .top { padding: 1rem 1rem 0; }
+  main { padding: 1.5rem 1rem 2.25rem; }
+  .foot { padding: .875rem 1rem 1.5rem; gap: .5rem 1rem; }
+  .panel { padding: 1.25rem; }
+}
+@media (pointer: coarse) {
+  .chip { min-height: 2.75rem; padding: .3rem 1.1rem; }
+  .foot a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   .choice:hover, .btn-primary:active { transform: none; }
