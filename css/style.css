@@ -287,6 +287,16 @@ textarea:focus { outline: none; border-color: var(--cobalt); box-shadow: 0 0 0 3
 textarea::placeholder { color: var(--text-soft); opacity: .7; }
 
 /* ---------- pesan ---------- */
+.status-ico {
+  display: none; place-items: center; width: 3.25rem; height: 3.25rem; margin-bottom: 1rem;
+  border-radius: 50%;
+}
+.status-ico.on { display: grid; }
+.status-ico svg { width: 1.6rem; height: 1.6rem; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.status-ico[data-tone="ok"] { background: var(--ok-bg); color: var(--ok); }
+.status-ico[data-tone="warn"] { background: var(--warn-bg); color: var(--warn-text); }
+.status-ico.is-err { background: var(--err-bg); color: var(--err); }
+
 .msg {
   padding: .7rem .95rem; border-radius: 12px; background: var(--card);
   border: 1.5px solid var(--line); border-left: 5px solid var(--edge); font-size: .9375rem;

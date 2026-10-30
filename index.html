@@ -173,6 +173,8 @@
       </div>
 
       <div id="xfer-done" class="panel" hidden>
+        <span class="status-ico" data-tone="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <span class="status-ico" data-tone="warn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span>
         <p class="msg msg-ok" id="done-text" role="status"></p>
         <a class="btn btn-primary" id="save-link" hidden data-i18n="xfer.save"></a>
         <p class="muted" id="save-hint" data-i18n="xfer.received.hint" hidden></p>
@@ -187,6 +189,7 @@
 
     <!-- Galat -->
     <section data-screen="error" hidden>
+      <span class="status-ico on is-err" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></span>
       <h1 tabindex="-1" id="err-title"></h1>
       <p class="lead" id="err-body" role="alert"></p>
       <div class="panel" id="err-tips" hidden>
