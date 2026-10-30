@@ -445,8 +445,8 @@ function renderTransfer() {
     panels.incoming = true;
     const ext = extensionOf(name);
     $('in-name').textContent = name;
-    $('in-size').textContent = formatBytes(X.meta.size);
-    $('in-type').textContent = ext || X.meta.mime ? [ext && `.${ext}`, X.meta.mime && `(${X.meta.mime})`].filter(Boolean).join(' ') : t('incoming.type.none');
+    const kind = ext || X.meta.mime ? [ext && `.${ext}`, X.meta.mime && `(${X.meta.mime})`].filter(Boolean).join(' ') : t('incoming.type.none');
+    $('in-meta').textContent = `${formatBytes(X.meta.size)} · ${kind}`;
     const risky = RISKY_EXTENSIONS.includes(ext);
     setMsg($('in-risky'), risky ? t('incoming.risky', { ext }) : '');
   } else if (m === 'received') {

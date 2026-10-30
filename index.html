@@ -152,11 +152,10 @@
       <h1 tabindex="-1" id="xfer-title"></h1>
 
       <div id="xfer-incoming" class="panel" hidden>
-        <dl class="facts">
-          <dt data-i18n="incoming.name"></dt><dd id="in-name"></dd>
-          <dt data-i18n="incoming.size"></dt><dd id="in-size"></dd>
-          <dt data-i18n="incoming.type"></dt><dd id="in-type"></dd>
-        </dl>
+        <div class="filecard">
+          <p class="filecard-name" id="in-name"></p>
+          <p class="filecard-meta" id="in-meta"></p>
+        </div>
         <p class="msg msg-warn" id="in-risky" role="alert" hidden></p>
         <p class="muted" data-i18n="incoming.hint"></p>
         <div class="actions">
