@@ -117,7 +117,7 @@ section > .step + h1, section > .step + h2, section > .badge + h1 { margin-top: 
 /* ---------- tipografi ---------- */
 h1 {
   margin: 0; font-size: clamp(1.9rem, 7vw, 2.9rem); line-height: 1.04;
-  font-weight: 800; font-stretch: 106%; letter-spacing: -.028em; text-wrap: balance;
+  font-weight: 800; font-stretch: 106%; letter-spacing: -.028em; text-wrap: balance; overflow-wrap: anywhere;
 }
 h2 { margin: 0; font-size: 1.3125rem; line-height: 1.2; font-weight: 750; font-stretch: 104%; letter-spacing: -.015em; }
 h1:focus { outline: none; }
@@ -151,7 +151,7 @@ h1:focus { outline: none; }
 .btn-quiet { border-color: transparent; color: var(--text-soft); }
 .btn-quiet:hover { color: var(--text); }
 .btn[disabled] { opacity: .4; cursor: not-allowed; box-shadow: none; transform: none; }
-.btn[disabled]:hover { background: var(--cobalt); }
+.btn-primary[disabled]:hover { background: var(--cobalt); }
 .chip { min-height: 2.375rem; padding: .2rem .95rem; font-size: .875rem; border-width: 1.5px; border-color: var(--line); color: var(--text-soft); }
 .chip:hover { background: color-mix(in srgb, var(--text) 8%, transparent); color: var(--text); border-color: var(--edge); }
 
