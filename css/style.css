@@ -315,6 +315,7 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
 .panel { padding: 1.5rem; background: var(--card); border: 2px solid var(--edge); border-radius: var(--radius); }
 .panel > * + * { margin-top: .875rem; }
 .panel .actions { margin-top: 1.25rem; }
+#xfer-done .actions .btn { flex: 1 1 11rem; }
 .panel ul { margin: .5rem 0 0; padding-left: 1.25rem; }
 .panel li + li { margin-top: .375rem; }
 .panel > [hidden] + * { margin-top: 0; }
