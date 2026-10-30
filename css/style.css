@@ -320,11 +320,6 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
 .panel li + li { margin-top: .375rem; }
 .panel > [hidden] + * { margin-top: 0; }
 
-.facts { display: grid; grid-template-columns: max-content 1fr; gap: 0 1.25rem; margin: 0; }
-.facts dt, .facts dd { padding: .55rem 0; border-top: 1.5px solid var(--line); }
-.facts dt:first-of-type, .facts dt:first-of-type + dd { border-top: 0; padding-top: 0; }
-.facts dt { color: var(--text-soft); }
-.facts dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
 
 progress {
   width: 100%; height: 1.5rem; appearance: none; -webkit-appearance: none;
