@@ -330,6 +330,8 @@ dialog > * + * { margin-top: .875rem; }
 /* Layar kecil: gutter 16px, target sentuh lebih besar */
 @media (max-width: 26rem) {
   .top { padding: 1rem 1rem 0; }
+  .top { gap: .5rem; }
+  #lang-btn { white-space: nowrap; padding-inline: .7rem; font-size: .8125rem; }
   main { padding: 1.5rem 1rem 2.25rem; }
   .foot { padding: .875rem 1rem 1.5rem; gap: .5rem 1rem; }
   .panel { padding: 1.25rem; }
