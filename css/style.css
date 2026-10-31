@@ -11,61 +11,38 @@
 }
 
 :root {
-  color-scheme: light dark;
+  /* tema terminal: gelap di semua mode */
+  color-scheme: dark;
 
-  --text: #0e2236;
-  --text-soft: #475b6f;
-  --edge: #0e2236;
-  --paper: #e8eef4;
-  --card: #ffffff;
-  --line: #c7d3de;
-  --stub: #0e2236;
-  --stub-answer: #1a42c4;
-  --shadow: #0e2236;
-  --focus: #2457f5;
+  --text: #d7e0d9;
+  --text-soft: #8a9a8f;
+  --edge: #3a4a40;
+  --paper: #0b100d;
+  --card: #111813;
+  --line: #243029;
+  --stub: #16201a;
+  --stub-answer: #1f6f4a;
+  --shadow: #3a4a40;
+  --focus: #7dffb0;
 
-  --cobalt: #2457f5;
-  --cobalt-dark: #1a42c4;
-  --signal: #ffc93c;
-  --on-signal: #0e2236;
-  --ok: #0f7a56;
-  --ok-bg: #dff3ea;
-  --ok-text: #064a34;
-  --err: #b3261e;
-  --err-bg: #fbe5e3;
-  --err-text: #6e130e;
-  --warn: #a77a00;
-  --warn-bg: #fff1c7;
-  --warn-text: #4d3800;
+  --cobalt: #3ddc84;
+  --cobalt-dark: #1f9d5c;
+  --on-accent: #06210f;
+  --signal: #ffc53d;
+  --on-signal: #1a1400;
+  --ok: #4fd1a0;
+  --ok-bg: #0d2f26;
+  --ok-text: #b8f0da;
+  --err: #ff8a80;
+  --err-bg: #3a1613;
+  --err-text: #ffd0cc;
+  --warn: #e0b030;
+  --warn-bg: #33290a;
+  --warn-text: #ffe9a8;
 
-  --radius: 16px;
-  --font: "Archivo NvP", "Avenir Next", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, sans-serif;
-  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #e6edf5;
-    --text-soft: #9db0c3;
-    --edge: #5f7893;
-    --paper: #08131f;
-    --card: #102235;
-    --line: #24405c;
-    --stub: #1b3652;
-    --stub-answer: #1a42c4;
-    --shadow: #35506b;
-    --focus: #8fb0ff;
-
-    --ok: #4fd1a0;
-    --ok-bg: #0d2f26;
-    --ok-text: #b8f0da;
-    --err: #ff8a80;
-    --err-bg: #3a1613;
-    --err-text: #ffd0cc;
-    --warn: #e0b030;
-    --warn-bg: #33290a;
-    --warn-text: #ffe9a8;
-  }
+  --radius: 6px;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font: var(--mono);
 }
 
 * { box-sizing: border-box; }
@@ -81,7 +58,7 @@ body {
   flex-direction: column;
   background: var(--paper);
   color: var(--text);
-  font: 400 1.0625rem/1.5 var(--font);
+  font: 400 1rem/1.55 var(--font);
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
@@ -143,10 +120,10 @@ h1:focus { outline: none; }
 }
 .btn:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
 .btn-primary {
-  background: var(--cobalt); border-color: var(--cobalt); color: #fff;
+  background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent);
   box-shadow: 0 4px 0 var(--cobalt-dark);
 }
-.btn-primary:hover { background: var(--cobalt); box-shadow: 0 4px 0 var(--cobalt-dark), 0 8px 18px -6px rgba(36, 87, 245, .55); }
+.btn-primary:hover { background: var(--cobalt); box-shadow: 0 4px 0 var(--cobalt-dark), 0 8px 18px -6px color-mix(in srgb, var(--cobalt) 55%, transparent); }
 .btn-primary:active { transform: translateY(4px); box-shadow: 0 0 0 var(--cobalt-dark); }
 .btn-quiet { border-color: transparent; color: var(--text-soft); }
 .btn-quiet:hover { color: var(--text); }
@@ -203,13 +180,13 @@ h1:focus { outline: none; }
   content: ""; position: absolute; top: 1.125rem; right: 1.25rem;
   width: 1.375rem; height: 2.25rem; border-radius: .45rem;
 }
-.choice-send { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.choice-send { background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent); }
 .choice-send:hover { box-shadow: 0 7px 0 var(--cobalt-dark); }
-.choice-send .choice-sub { color: rgba(255, 255, 255, .88); }
-.choice-send::before { background: #fff; }
+.choice-send .choice-sub { color: color-mix(in srgb, var(--on-accent) 88%, transparent); }
+.choice-send::before { background: var(--on-accent); }
 .choice-recv { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
 .choice-recv:hover { box-shadow: 0 7px 0 #c9971a; }
-.choice-recv .choice-sub { color: rgba(14, 34, 54, .82); }
+.choice-recv .choice-sub { color: color-mix(in srgb, var(--on-signal) 82%, transparent); }
 .choice-recv::before { border: 3px solid var(--on-signal); }
 @media (min-width: 36rem) {
   .choices { grid-template-columns: 1fr 1fr; }
