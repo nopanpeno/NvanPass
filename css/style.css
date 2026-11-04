@@ -108,15 +108,17 @@ h1:focus { outline: none; }
   transition: background-color .15s, color .15s, border-color .15s;
 }
 .btn:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+.btn::before { content: "[\00a0"; }
+.btn::after { content: "\00a0]"; }
 .btn-primary {
   background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent);
 }
 .btn-primary:hover { background: var(--cobalt-dark); border-color: var(--cobalt-dark); }
-.btn-quiet { border-color: transparent; color: var(--text-soft); }
+.btn-quiet { border-color: transparent; color: var(--text-soft); padding-inline: 0; }
 .btn-quiet:hover { color: var(--text); }
 .btn[disabled] { opacity: .4; cursor: not-allowed; }
 .btn-primary[disabled]:hover { background: var(--cobalt); border-color: var(--cobalt); }
-.chip { min-height: 2.375rem; padding: .2rem .95rem; font-size: .875rem; border-width: 1.5px; border-color: var(--line); color: var(--text-soft); }
+.chip { min-height: 2.375rem; padding: .2rem .5rem; font-size: .875rem; border-color: transparent; color: var(--text-soft); }
 .chip:hover { background: color-mix(in srgb, var(--text) 8%, transparent); color: var(--text); border-color: var(--edge); }
 
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
@@ -174,13 +176,11 @@ h1:focus { outline: none; }
 /* ---------- pilih file ---------- */
 .drop {
   display: grid; justify-items: center; gap: .875rem; padding: 2.5rem 1rem 2.25rem; cursor: pointer; text-align: center;
-  border: 2.5px dashed var(--edge); border-radius: var(--radius); background: color-mix(in srgb, var(--card) 55%, transparent);
+  border: 1px dashed var(--edge); background: transparent;
   transition: background-color .15s, border-color .15s;
 }
 .drop::before {
-  content: ""; width: 2.75rem; height: 2.75rem; background: var(--focus);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 16V4m0 0L7 9m5-5l5 5'/%3E%3Cpath d='M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 16V4m0 0L7 9m5-5l5 5'/%3E%3Cpath d='M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3'/%3E%3C/svg%3E") center / contain no-repeat;
+  content: "[ + ]"; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--cobalt); letter-spacing: .05em;
 }
 .drop:hover { background: var(--card); border-color: var(--cobalt); }
 .drop.is-over { border-style: solid; border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 12%, var(--card)); }
@@ -188,25 +188,24 @@ h1:focus { outline: none; }
 .drop .btn { pointer-events: none; }
 .filecard {
   padding: 1rem 1.25rem 1rem 1.5rem; background: var(--card); border-radius: var(--radius);
-  border: 2px solid var(--edge); border-left: 10px solid var(--cobalt);
+  border: 2px solid var(--edge); border-left: 4px solid var(--cobalt);
 }
 .filecard-name { margin: 0; font-weight: 750; overflow-wrap: anywhere; }
 .filecard-meta { margin: .125rem 0 0; color: var(--text-soft); font-variant-numeric: tabular-nums; }
 
 /* ---------- tiket ---------- */
-.ticket { border-radius: var(--radius); background: var(--card); border: 2px solid var(--edge); }
+.ticket { background: var(--card); border: 3px double var(--edge); }
 .ticket-stub {
   position: relative; 
   display: flex; flex-direction: column; gap: .125rem; padding: 1rem 1.5rem;
   background: var(--stub); color: var(--text);
-  border-bottom: 2.5px dashed var(--edge);
+  border-bottom: 1px dashed var(--edge);
 }
-.ticket-label { font-weight: 800; font-size: 1.125rem; letter-spacing: -.01em; }
+.ticket-label { font-weight: 800; font-size: 1.125rem; }
+.ticket-label::before { content: "$ "; color: var(--cobalt); }
 .ticket-file { font-size: .875rem; opacity: .82; overflow-wrap: anywhere; }
 .ticket-answer .ticket-stub { background: var(--stub-answer); }
 .ticket-body { display: grid; justify-items: center; gap: .5rem; padding: 1.5rem 1.25rem 1.25rem; }
-.ticket-stub::before { left: calc(-.75rem - 1px); }
-.ticket-stub::after { right: calc(-.75rem - 1px); }
 
 /* QR selalu hitam di atas putih, termasuk di mode gelap, supaya mudah dipindai */
 .qr {
@@ -222,7 +221,7 @@ h1:focus { outline: none; }
 
 .codebox {
   display: block; width: 100%; max-height: 4.5rem; overflow: auto; padding: .7rem .85rem;
-  background: var(--paper); border-radius: 0; font: .8125rem/1.4 var(--mono); overflow-wrap: anywhere; user-select: all;
+  background: var(--paper); border: 1px dashed var(--edge); border-radius: 0; font: .8125rem/1.4 var(--mono); overflow-wrap: anywhere; user-select: all;
 }
 
 /* ---------- isian ---------- */
@@ -246,8 +245,9 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
 
 .msg {
   padding: .7rem .95rem; border-radius: 0; background: var(--card);
-  border: 1.5px solid var(--line); border-left: 5px solid var(--edge); font-size: .9375rem;
+  border: 1.5px solid var(--line); border-left: 3px solid var(--edge); font-size: .9375rem;
 }
+.msg:empty { display: none; }
 .msg-error { background: var(--err-bg); border-color: var(--err); color: var(--err-text); }
 .msg-ok { background: var(--ok-bg); border-color: var(--ok); color: var(--ok-text); font-weight: 650; }
 .msg-warn { background: var(--warn-bg); border-color: var(--warn); color: var(--warn-text); font-weight: 600; }
@@ -278,16 +278,14 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
 /* ---------- dialog ---------- */
 dialog {
   width: min(92vw, 30rem); padding: 1.5rem; color: var(--text); background: var(--card);
-  border: 2px solid var(--edge); border-radius: var(--radius);
+  border: 3px double var(--edge); border-radius: var(--radius);
 }
-dialog[open] { animation: pop .16s ease-out; }
-@keyframes pop { from { opacity: 0; } to { opacity: 1; } }
 dialog::backdrop { background: rgba(0, 0, 0, .8); }
 dialog > * + * { margin-top: .875rem; }
 .viewfinder { position: relative; overflow: hidden; border-radius: 0; background: #000; aspect-ratio: 1; }
 .viewfinder video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .reticle {
-  position: absolute; inset: 14%; border: 3px solid var(--cobalt); border-radius: 0;
+  position: absolute; inset: 14%; border: 2px dashed var(--cobalt); border-radius: 0;
   pointer-events: none;
 }
 
