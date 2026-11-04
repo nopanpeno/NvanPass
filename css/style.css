@@ -158,20 +158,14 @@ h1:focus { outline: none; }
 }
 .choice:hover { border-color: var(--focus); }
 .choice-name { font-size: 1.625rem; line-height: 1.1; font-weight: 800; letter-spacing: -.025em; }
+.choice-name::before { content: "> "; }
 .choice-sub { font-size: .9375rem; line-height: 1.35; max-width: 20rem; }
-/* gagang di pojok: isi untuk pengirim, garis untuk penerima, sama seperti logo */
-.choice::before {
-  content: ""; position: absolute; top: 1.125rem; right: 1.25rem;
-  width: 1.375rem; height: 2.25rem; border-radius: 0;
-}
 .choice-send { background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent); }
 .choice-send:hover { background: var(--cobalt-dark); border-color: var(--cobalt-dark); }
 .choice-send .choice-sub { color: color-mix(in srgb, var(--on-accent) 88%, transparent); }
-.choice-send::before { background: var(--on-accent); }
 .choice-recv { background: transparent; border-color: var(--cobalt); color: var(--cobalt); }
 .choice-recv:hover { background: color-mix(in srgb, var(--cobalt) 12%, transparent); }
 .choice-recv .choice-sub { color: var(--text-soft); }
-.choice-recv::before { border: 3px solid var(--cobalt); }
 @media (min-width: 36rem) {
   .choices { grid-template-columns: 1fr 1fr; }
   .choice { min-height: 10.5rem; }
@@ -221,10 +215,10 @@ h1:focus { outline: none; }
 }
 .loading { margin: 2rem 0; color: var(--text-soft); }
 .loading::before {
-  content: ""; display: inline-block; width: .9em; height: .9em; margin-right: .55em; vertical-align: -.1em;
-  border: 2.5px solid var(--line); border-top-color: var(--cobalt); animation: spin .8s linear infinite;
+  content: "█"; display: inline-block; margin-right: .55em; color: var(--cobalt);
+  animation: blink 1s steps(1) infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes blink { 50% { opacity: 0; } }
 
 .codebox {
   display: block; width: 100%; max-height: 4.5rem; overflow: auto; padding: .7rem .85rem;
@@ -243,14 +237,12 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
 
 /* ---------- pesan ---------- */
 .status-ico {
-  display: none; place-items: center; width: 3.25rem; height: 3.25rem; margin-bottom: 1rem;
-  border-radius: 0;
+  display: none; margin-bottom: 1rem; font-weight: 800; letter-spacing: .05em;
 }
-.status-ico.on { display: grid; }
-.status-ico svg { width: 1.6rem; height: 1.6rem; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.status-ico[data-tone="ok"] { background: var(--ok-bg); color: var(--ok); }
-.status-ico[data-tone="warn"] { background: var(--warn-bg); color: var(--warn-text); }
-.status-ico.is-err { background: var(--err-bg); color: var(--err); }
+.status-ico.on { display: block; }
+.status-ico[data-tone="ok"] { color: var(--ok); }
+.status-ico[data-tone="warn"] { color: var(--warn); }
+.status-ico.is-err { color: var(--err); }
 
 .msg {
   padding: .7rem .95rem; border-radius: 0; background: var(--card);
@@ -281,13 +273,7 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
   font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums;
 }
 
-progress {
-  width: 100%; height: 1.5rem; appearance: none; -webkit-appearance: none;
-  border: 2px solid var(--edge); border-radius: 0; overflow: hidden; background: var(--paper);
-}
-progress::-webkit-progress-bar { background: var(--paper); }
-progress::-webkit-progress-value { background: var(--cobalt); border-radius: 0; transition: width .2s; }
-progress::-moz-progress-bar { background: var(--cobalt); border-radius: 0; }
+.ascii-bar { margin: 0; font-size: 1rem; line-height: 1.2; white-space: pre; overflow: hidden; color: var(--cobalt); }
 
 /* ---------- dialog ---------- */
 dialog {
