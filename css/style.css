@@ -66,7 +66,7 @@ body {
   color: var(--text); text-decoration: none;
   font-size: 1.1875rem; font-weight: 800; letter-spacing: -.01em;
 }
-.brand svg { flex: none; }
+.brand-mark { color: var(--cobalt); }
 
 main { flex: 1; width: 100%; max-width: 44rem; margin: 0 auto; padding: 1.75rem 1.25rem 2.5rem; }
 section > * + * { margin-top: 1rem; }
@@ -131,15 +131,21 @@ h1:focus { outline: none; }
   background: var(--stub); color: var(--text);
   padding: 1.25rem;
 }
-.hero-art { position: relative; display: block; width: 100%; max-width: 30rem; height: auto; margin: 0 auto; overflow: visible; }
-.packet { transform: translateX(0); opacity: 0; animation: flow 2.8s cubic-bezier(.5, 0, .5, 1) infinite; }
+.hero-art {
+  position: relative; display: block; width: fit-content; max-width: 100%; margin: 0 auto; overflow: hidden;
+  font: .875rem/1 var(--mono); color: var(--cobalt); white-space: pre;
+}
+.packet {
+  position: absolute; top: 1em; left: 7ch; color: var(--text); opacity: 0;
+  animation: flow 2.8s steps(19) infinite;
+}
 .packet-2 { animation-delay: .3s; }
 .packet-3 { animation-delay: .6s; }
 @keyframes flow {
   0%   { transform: translateX(0); opacity: 0; }
-  14%  { opacity: 1; }
-  78%  { opacity: 1; }
-  100% { transform: translateX(172px); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(19ch); opacity: 0; }
 }
 .hero + h1 { margin-top: 1.75rem; }
 
@@ -313,11 +319,11 @@ dialog > * + * { margin-top: .875rem; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .choice:hover,   /* titik tampil diam, tersebar di jalur */
+  /* panah tampil diam, tersebar di jalur */
   .packet { animation: none; opacity: 1; }
-  .packet-1 { transform: translateX(28px); }
-  .packet-2 { transform: translateX(86px); }
-  .packet-3 { transform: translateX(144px); }
+  .packet-1 { transform: translateX(2ch); }
+  .packet-2 { transform: translateX(9ch); }
+  .packet-3 { transform: translateX(16ch); }
 }
 
 /* ---------- halaman teks ---------- */
