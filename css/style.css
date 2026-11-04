@@ -8,7 +8,7 @@
 
   --text: #d7e0d9;
   --text-soft: #8a9a8f;
-  --edge: #3a4a40;
+  --edge: #56705f;
   --paper: #0b100d;
   --card: #111813;
   --line: #243029;
@@ -108,8 +108,8 @@ h1:focus { outline: none; }
   transition: background-color .15s, color .15s, border-color .15s;
 }
 .btn:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
-.btn::before { content: "[\00a0"; }
-.btn::after { content: "\00a0]"; }
+.btn::before { content: "[\00a0"; content: "[\00a0" / ""; }
+.btn::after { content: "\00a0]"; content: "\00a0]" / ""; }
 .btn-primary {
   background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent);
 }
@@ -160,7 +160,7 @@ h1:focus { outline: none; }
 }
 .choice:hover { border-color: var(--focus); }
 .choice-name { font-size: 1.625rem; line-height: 1.1; font-weight: 800; letter-spacing: -.025em; }
-.choice-name::before { content: "> "; }
+.choice-name::before { content: "> "; content: "> " / ""; }
 .choice-sub { font-size: .9375rem; line-height: 1.35; max-width: 20rem; }
 .choice-send { background: var(--cobalt); border-color: var(--cobalt); color: var(--on-accent); }
 .choice-send:hover { background: var(--cobalt-dark); border-color: var(--cobalt-dark); }
@@ -180,7 +180,7 @@ h1:focus { outline: none; }
   transition: background-color .15s, border-color .15s;
 }
 .drop::before {
-  content: "[ + ]"; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--cobalt); letter-spacing: .05em;
+  content: "[ + ]"; content: "[ + ]" / ""; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--cobalt); letter-spacing: .05em;
 }
 .drop:hover { background: var(--card); border-color: var(--cobalt); }
 .drop.is-over { border-style: solid; border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 12%, var(--card)); }
@@ -202,7 +202,7 @@ h1:focus { outline: none; }
   border-bottom: 1px dashed var(--edge);
 }
 .ticket-label { font-weight: 800; font-size: 1.125rem; }
-.ticket-label::before { content: "$ "; color: var(--cobalt); }
+.ticket-label::before { content: "$ "; content: "$ " / ""; color: var(--cobalt); }
 .ticket-file { font-size: .875rem; opacity: .82; overflow-wrap: anywhere; }
 .ticket-answer .ticket-stub { background: var(--stub-answer); }
 .ticket-body { display: grid; justify-items: center; gap: .5rem; padding: 1.5rem 1.25rem 1.25rem; }
@@ -214,7 +214,7 @@ h1:focus { outline: none; }
 }
 .loading { margin: 2rem 0; color: var(--text-soft); }
 .loading::before {
-  content: "█"; display: inline-block; margin-right: .55em; color: var(--cobalt);
+  content: "█"; content: "█" / ""; display: inline-block; margin-right: .55em; color: var(--cobalt);
   animation: blink 1s steps(1) infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
@@ -248,6 +248,9 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
   border: 1.5px solid var(--line); border-left: 3px solid var(--edge); font-size: .9375rem;
 }
 .msg:empty { display: none; }
+.msg::before { font-weight: 800; margin-right: .6em; }
+.msg-error::before { content: "ERR"; content: "ERR" / ""; }
+.msg-warn::before { content: "WARN"; content: "WARN" / ""; }
 .msg-error { background: var(--err-bg); border-color: var(--err); color: var(--err-text); }
 .msg-ok { background: var(--ok-bg); border-color: var(--ok); color: var(--ok-text); font-weight: 650; }
 .msg-warn { background: var(--warn-bg); border-color: var(--warn); color: var(--warn-text); font-weight: 600; }
@@ -258,7 +261,7 @@ textarea::placeholder { color: var(--text-soft); opacity: .7; }
   display: inline-flex; align-items: center; gap: .6rem;
   font-weight: 750; font-size: .9375rem; color: var(--ok);
 }
-.badge::before { content: ""; width: .75rem; height: .75rem; border-radius: 0; background: var(--ok); }
+.badge::before { content: "[*]"; content: "[*]" / ""; }
 .panel { padding: 1.5rem; background: var(--card); border: 2px solid var(--edge); border-radius: var(--radius); }
 .panel > * + * { margin-top: .875rem; }
 .panel .actions { margin-top: 1.25rem; }
@@ -299,6 +302,7 @@ dialog > * + * { margin-top: .875rem; }
 @media (pointer: coarse) {
   .chip { min-height: 2.75rem; padding: .3rem 1.1rem; }
   .foot a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+  .brand { min-height: 2.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
