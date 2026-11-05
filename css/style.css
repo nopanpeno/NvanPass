@@ -133,6 +133,17 @@ h1:focus { outline: none; }
   background: var(--stub); color: var(--text);
   padding: 1.25rem;
 }
+.logo-art {
+  display: block; width: fit-content; max-width: 100%; margin: 0 auto 1.25rem; overflow: hidden;
+  color: var(--cobalt); white-space: pre; line-height: 1;
+}
+/* HP: 43 kolom, ukuran font ikut lebar layar */
+.logo-sm { font: 1rem/1 var(--mono); font-size: min(1rem, calc((100vw - 4.5rem) / 26)); }
+.logo-lg { display: none; font: .875rem/1 var(--mono); }
+@media (min-width: 44rem) {
+  .logo-sm { display: none; }
+  .logo-lg { display: block; }
+}
 .hero-art {
   position: relative; display: block; width: fit-content; max-width: 100%; margin: 0 auto; overflow: hidden;
   font: .875rem/1 var(--mono); color: var(--cobalt); white-space: pre;
